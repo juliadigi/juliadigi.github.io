@@ -23,7 +23,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        /* Hienompi ja värikkäämpi sääkortti */
+        /*  sääkortti */
         .weather-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
             padding: 25px;
@@ -58,7 +58,7 @@
 </head>
 <body>
 
-    <!-- Navigaatio -->
+    <!-- Navigaatiopalkki -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Digitekniikat</a>
@@ -100,13 +100,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Kellonaika
+        // Haetaan nykyinen kellonaika ladattaessa
         const nyt = new Date();
         const tunnit = String(nyt.getHours()).padStart(2, '0');
         const minutit = String(nyt.getMinutes()).padStart(2, '0');
         document.getElementById("kellonaika").innerText = "Sää kello " + tunnit + ":" + minutit;
 
-        // OpenWeather API
+        // OpenWeather API haetaan sieltä Helsingin sää
         const url = "https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric";
 
         fetch(url)
@@ -122,17 +122,17 @@
           .catch(function (error) {
             document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan</p>";
           });
-
+        // tulosta säätiedot korttiin
         function naytaSaa(data) {
           let kuvaus = data.weather[0].description;
           let lampotila = data.main.temp;
           let tuuli = data.wind.speed;
           let iconKoodi = data.weather[0].icon;
 
-          // Käytetään tarkempaa @4x-kokoista kuvaa OpenWeatherista
+          // sääikoni openweather
           let kuvaUrl = "https://openweathermap.org/img/wn/" + iconKoodi + "@4x.png";
 
-          // Luodaan visuaalisesti hienompi kortti
+          // tehdään kortin html
           let html = "<div class='weather-card'>";
           html += "<div class='d-flex align-items-center mb-3'>";
           html += "  <div class='weather-icon-wrapper me-3'><img src='" + kuvaUrl + "' alt='" + kuvaus + "'></div>";
