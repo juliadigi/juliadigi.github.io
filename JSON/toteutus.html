@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitekniikat - Toteutus</title>
-    <!-- Bootstrap CSS navigaatiota ja tyylejä varten -->
+    <title>Digitekniikat</title>
+    <!-- Bootstrap 5 CSS sinistä teemaa ja navigaatiota varten -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -23,14 +23,21 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        /* Sinisen värimaailman muotoilut haetulle datalle */
         #vastaus h1 {
             color: #0a58ca;
             font-weight: bold;
             margin-bottom: 15px;
         }
+        #vastaus h3 {
+            color: #0d6efd;
+            margin-top: 20px;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 5px;
+        }
         #vastaus img {
             max-width: 100%;
-            max-height: 300px;
+            max-height: 350px;
             border-radius: 6px;
             margin: 15px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.15);
@@ -45,7 +52,7 @@
 </head>
 <body>
 
-    <!-- Navigaatio -->
+    <!-- Navigaatio (Täsmälleen sama kuin index.html-sivulla) -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a class="navbar-brand font-weight-bold" href="index.html">Digitekniikat</a>
@@ -55,17 +62,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Etusivu (JSON)</a>
+                        <a class="nav-link" href="index.html">Etusivu (Tehtävä 1 OSA 1)</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="toteutus.html">Toteutus</a>
+                        <a class="nav-link active" href="toteutus.html">Tehtävä 1 OSA 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="toteutus.html">Tehtävä 2 OSA 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="toteutus.html">Tehtävä 2 OSA 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="toteutus.html">Tehtävä 3</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Sisältöalue -->
+    <!-- Pääsisältö, johon toteutus.json -data ladataan -->
     <div class="container">
         <div class="main-container">
             <div id="vastaus">
@@ -74,16 +90,16 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS (navigaation toimintaa varten) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript-koodi datan hakemiseen -->
+    <!-- JavaScript JSON-datan hakemiseen ja näyttämiseen -->
     <script>
-        // 1. Haetaan tieto toteutus.json -tiedostosta
+        // Haetaan tiedot toteutus.json -tiedostosta
         fetch('toteutus.json')
           .then(function (response) {
             if (!response.ok) {
-                throw new Error("Tiedostoa ei löytynyt");
+                throw new Error("Tiedostoa toteutus.json ei löytynyt");
             }
             return response.json();
           })
@@ -94,7 +110,7 @@
             document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan (" + error.message + ")</p>";
           });
 
-        // 2. Funktio, joka muodostaa HTML-sisällön
+        // Funktio datan tulostamiseen
         function naytaTiedot(data) {
           let tiedot = "<h1>Toteutus: " + data.toteutusNimi + "</h1>";
           tiedot += "<p><img src='" + data.kuva + "' alt='Toteutuksen kuva'></p>";
@@ -105,14 +121,13 @@
 
           tiedot += "<h3>Osallistujat</h3><ul>";
 
-          // Käydään läpi osallistujat-taulukko silmukan (for) avulla
+          // Käydään osallistujat läpi silmukalla
           for (var i = 0; i < data.osallistujat.length; i++) {
             tiedot += "<li>" + data.osallistujat[i] + "</li>";
           }
 
           tiedot += "</ul>";
 
-          // Kirjoitetaan valmis HTML sivulle
           document.getElementById("vastaus").innerHTML = tiedot;
         }
     </script>
