@@ -10,7 +10,8 @@
 
   <script>
     console.log("Skripti käynnistyi");
-    fetch("./tietue.json")
+
+    fetch("tietue.json")
       .then(response => {
         console.log("Fetch status:", response.status);
         if (!response.ok) {
@@ -23,14 +24,14 @@
         document.getElementById("tulos").innerHTML = `
           <h2>${data.otsikko}</h2>
           <p>${data.kuvaus}</p>
-          <img src="${data.kuva}" alt="Kuva" width="300">
+          <img src="${data.kuva}" width="300">
         `;
       })
       .catch(error => {
-        document.getElementById("tulos").innerHTML = `<p style="color:red;">Virhe: ${error.message}</p>`;
+        document.getElementById("tulos").innerHTML =
+          "<p style='color:red;'>Virhe: " + error.message + "</p>";
         console.error(error);
       });
   </script>
 </body>
 </html>
-
