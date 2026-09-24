@@ -2,49 +2,128 @@
 <html lang="fi">
 <head>
     <meta charset="UTF-8">
-    <title>JSON-tehtävä</title>
-    <!-- Voit lisätä head-osioon Bootstrap-linkit tarvittaessa -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitekniikat - JSON</title>
+    <!-- Bootstrap 5 CSS sinistä teemaa ja navigaatiota varten -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-custom {
+            background-color: #0d6efd; /* Sininen teemaväri */
+        }
+        .main-container {
+            background: #ffffff;
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Sinisen värimaailman muotoilut haetulle datalle */
+        #vastaus h1 {
+            color: #0a58ca;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        #vastaus h3 {
+            color: #0d6efd;
+            margin-top: 20px;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 5px;
+        }
+        #vastaus img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        #vastaus a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        #vastaus a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Paikka, johon JavaScript kirjoittaa tiedot -->
-    <div id="vastaus"></div>
+    <!-- Navigaatio (Sininen Bootstrap nav) -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="index.html">Digitekniikat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Etusivu (JSON)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="toteutus.html">Toteutus</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Pääsisältö, johon JSON-data ladataan -->
+    <div class="container">
+        <div class="main-container">
+            <div id="vastaus">
+                <p class="text-muted">Ladataan tietoja...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (navigaation toimintaa varten) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript JSON-datan hakemiseen ja näyttämiseen -->
     <script>
-        // 1. Tiedon haku JSON-tietueesta (dia 4)
-        fetch('tietue.JSON')
+        // Tiedon haku JSON-tietueesta
+        // Varmista, että tiedostonimi koneellasi/GitHubissa vastaa täsmälleen tätä (tietue.json vai tietue.JSON)
+        fetch('tietue.json')
           .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Tiedostoa ei löytynyt");
+            }
             return response.json();
           })
           .then(function (responseJson) {
             kerro(responseJson);
           })
           .catch(function (error) {
-            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan (" + error.message + ")</p>";
           });
 
-        // 2. kerro()-funktio (diat 5 ja 6)
+        // Opettajan ohjeiden mukainen kerro()-funktio
         function kerro(obj) {
-          // Haetaan otsikko, kuvaus, kuva ja opintojakson tiedot
-          let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
-          tiedot += "<p><img src=" + obj.kuva + "></p>";
+          let tiedot = "<h1>" + obj.otsikko + "</h1>" + obj.kuvaus + "<br><hr>";
+          tiedot += "<p><img src='" + obj.kuva + "' alt='Digikuva'></p>";
+          
           tiedot += "<h3>Opintojakso</h3>";
-          tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>";
-          tiedot += "Tunnus: " + obj.opintojakso.tunnus + "<br>";
-          tiedot += "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
+          tiedot += "<b>Nimi:</b> " + obj.opintojakso.nimi + "<br>";
+          tiedot += "<b>Tunnus:</b> " + obj.opintojakso.tunnus + "<br>";
+          tiedot += "<b>Opintopisteet:</b> " + obj.opintojakso.opintopisteet + " op<br>";
 
-          // Lisätään Aiheet-osio
-          tiedot += "<p><h3> Aiheet </h3>";
+          tiedot += "<h3>Aiheet</h3><p>";
 
-          // Käydään läpi tekniikat-taulukko for-silmukalla
+          // Käydään läpi tekniikat-taulukko
           for (var i = 0; i < obj.tekniikat.length; i++) {
-            tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>";
-            tiedot += " <a href=" + obj.tekniikat[i].linkki + ">" + obj.tekniikat[i].linkki + "</a><br>";
+            tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b> - ";
+            tiedot += "<a href='" + obj.tekniikat[i].linkki + "' target='_blank'>" + obj.tekniikat[i].linkki + "</a><br>";
           }
 
           tiedot += "</p>";
 
-          // Kirjoitetaan tiedot sivulle id="vastaus" -elementtiin
+          // Kirjoitetaan tiedot elementtiin, jonka id on 'vastaus'
           document.getElementById("vastaus").innerHTML = tiedot;
         }
     </script>
