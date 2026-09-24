@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <meta charset="UTF-8">
-  <title>Testi</title>
-</head>
-<body>
-  <h1>JSON-sivu toimii</h1>
-  <p>Jos näet tämän tekstin, HTML toimii.</p>
-</body>
-</html>
+<script>
+  fetch("./tietue.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("JSON-tiedostoa ei löytynyt");
+      }
+      return response.json();
+    })
+    .then(data => {
+      document.body.innerHTML = `
+        <h1>${data.otsikko}</h1>
+        <p>${data.kuvaus}</p>
+        <img src="${data.kuva}" alt="Kuva" width="300">
+        <h2>${data.opintojakso.nimi} (${data.opintojakso.tunnus})</h2>
+        <p>Opintopisteet: ${data.opintojakso.opintopisteet}</p>
+        <ul>${data.opintojakso.sisalto.map(aihe => `<li>${aihe}</li>`).join("")}</ul>
+        <h3>Tekniikat</h3>
+        <ul>${data.tekniikat.map(t => `<li><a href="${t.linkki}" target="_blank">${t.aihe}</a></li>`).join("")}</ul>
+      `;
+    })
+    .catch(error => {
+      document.body.innerHTML = `<p style="color:red;">Virhe: ${error.message}</p>`;
+      console.error(error);
+    });
+</script>
