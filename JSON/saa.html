@@ -23,17 +23,36 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        /* Sääkortin muotoilu */
+        /* Hienompi ja värikkäämpi sääkortti */
         .weather-card {
-            background: #eef5ff;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #0d6efd;
-            margin-top: 15px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #bbdefb;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+            max-width: 400px;
         }
-        #saaKuva img {
-            width: 80px;
-            height: 80px;
+        /* Ikonin muotoilu ja varjostus */
+        .weather-icon-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        .weather-icon-wrapper img {
+            width: 100px;
+            height: 100px;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+        .temp-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0d6efd;
         }
     </style>
 </head>
@@ -42,23 +61,26 @@
     <!-- Navigaatio -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a class="navbar-brand font-weight-bold" href="index.html">Digitekniikat</a>
+            <a class="navbar-brand fw-bold" href="index.html">Digitekniikat</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Etusivu (Tehtävä 1 OSA 1)</a>
+                        <a class="nav-link" href="index.html">Etusivu (Tehtävä 1 OSA 1)</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="toteutus.html">Tehtävä 1 OSA 2</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pokemon.html">Poke haku</a>
+                        <a class="nav-link" href="pokemon.html">Poke haku (Tehtävä 2 OSA 1)</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="toteutus.html">Tehtävä 2 OSA 2</a>
+                        <a class="nav-link" href="pokemon.html">Tehtävä 2 OSA 2</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="saa.html">Tehtävä 3</a>
+                        <a class="nav-link active" href="saa.html">Tehtävä 3</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +91,6 @@
     <div class="container">
         <div class="main-container">
             <h1>Sää Helsingissä</h1>
-            <!-- Paikka latausajan esittämiseen -->
             <p id="kellonaika" class="text-muted fw-bold"></p>
 
             <div id="vastaus">
@@ -81,18 +102,16 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript säätietojen hakemiseen -->
     <script>
-        // 1. Näytetään kellonaika, kun sivu on ladattu (Dia 3)
+        // Kellonaika
         const nyt = new Date();
         const tunnit = String(nyt.getHours()).padStart(2, '0');
         const minutit = String(nyt.getMinutes()).padStart(2, '0');
         document.getElementById("kellonaika").innerText = "Sää kello " + tunnit + ":" + minutit;
 
-        // 2. OpenWeather API URL Helsingin säätiedoille (Dia 2)
+        // OpenWeather API
         const url = "https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric";
 
-        // 3. Haetaan säädata fetchillä (Dia 2)
         fetch(url)
           .then(function (response) {
             if (!response.ok) {
@@ -104,24 +123,29 @@
             naytaSaa(data);
           })
           .catch(function (error) {
-            document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan (" + error.message + ")</p>";
+            document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan</p>";
           });
 
-        // 4. Funktio säätietojen tulostamiseen sivulle (Dia 3)
         function naytaSaa(data) {
-          // Luetaan halutut arvot OpenWeather JSON-oliosta
           let kuvaus = data.weather[0].description;
           let lampotila = data.main.temp;
           let tuuli = data.wind.speed;
           let iconKoodi = data.weather[0].icon;
-          let kuvaUrl = "https://openweathermap.org/img/wn/" + iconKoodi + "@2x.png";
 
-          // Rakennetaan HTML-muotoilu (Dia 3)
+          // Käytetään tarkempaa @4x-kokoista kuvaa OpenWeatherista
+          let kuvaUrl = "https://openweathermap.org/img/wn/" + iconKoodi + "@4x.png";
+
+          // Luodaan visuaalisesti hienompi kortti
           let html = "<div class='weather-card'>";
-          html += "<p id='saaKuva'><img src='" + kuvaUrl + "' alt='" + kuvaus + "'></p>";
-          html += "<p><b>Sää:</b> " + kuvaus + "</p>";
-          html += "<p><b>Lämpötila:</b> " + lampotila + " °C</p>";
-          html += "<p><b>Tuuli:</b> " + tuuli + " m/s</p>";
+          html += "<div class='d-flex align-items-center mb-3'>";
+          html += "  <div class='weather-icon-wrapper me-3'><img src='" + kuvaUrl + "' alt='" + kuvaus + "'></div>";
+          html += "  <div>";
+          html += "    <div class='temp-text'>" + lampotila + " °C</div>";
+          html += "    <div class='text-capitalize text-secondary fw-semibold'>" + kuvaus + "</div>";
+          html += "  </div>";
+          html += "</div>";
+          html += "<hr>";
+          html += "<p class='mb-0'><b>Tuulen nopeus:</b> " + tuuli + " m/s</p>";
           html += "</div>";
 
           document.getElementById("vastaus").innerHTML = html;
