@@ -2,36 +2,75 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>JSON Testi</title>
+  <title>JSON Example</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      margin: 1rem 0;
+      border-radius: 4px;
+      max-width: 100%;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      margin-left: 1.2rem;
+    }
+
+    a {
+      color: #0b5ed7;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #ddd;
+      padding-top: 0.5rem;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>JSON Testi</h1>
-  <div id="tulos">Ladataan JSON-dataa...</div>
 
-  <script>
-    console.log("Skripti käynnistyi");
+<header>
+  <h1>JSON Example</h1>
+  <p class="lead">Tällä sivulla näytetään JSON-tiedoston <code>tietue.json</code> sisältö.</p>
+</header>
 
-    fetch("tietue.json")
-      .then(response => {
-        console.log("Fetch status:", response.status);
-        if (!response.ok) {
-          throw new Error("JSON-tiedostoa ei löytynyt");
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("Data ladattu:", data);
-        document.getElementById("tulos").innerHTML = `
-          <h2>${data.otsikko}</h2>
-          <p>${data.kuvaus}</p>
-          <img src="${data.kuva}" width="300">
-        `;
-      })
-      .catch(error => {
-        document.getElementById("tulos").innerHTML =
-          "<p style='color:red;'>Virhe: " + error.message + "</p>";
-        console.error(error);
-      });
-  </script>
-</body>
-</html>
+<section id="perus">
+  <h2>Perustied
