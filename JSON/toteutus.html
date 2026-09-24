@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitekniikat - Toteutus</title>
+    <!-- Bootstrap CSS navigaatiota ja tyylejä varten -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-custom {
+            background-color: #0d6efd; /* Sininen teemaväri */
+        }
+        .main-container {
+            background: #ffffff;
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #vastaus h1 {
+            color: #0a58ca;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        #vastaus img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 6px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        #vastaus ul {
+            background: #eef5ff;
+            padding: 15px 35px;
+            border-radius: 6px;
+            border-left: 4px solid #0d6efd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigaatio -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="index.html">Digitekniikat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Etusivu (JSON)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="toteutus.html">Toteutus</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sisältöalue -->
+    <div class="container">
+        <div class="main-container">
+            <div id="vastaus">
+                <p class="text-muted">Ladataan toteutuksen tietoja...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript-koodi datan hakemiseen -->
+    <script>
+        // 1. Haetaan tieto toteutus.json -tiedostosta
+        fetch('toteutus.json')
+          .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Tiedostoa ei löytynyt");
+            }
+            return response.json();
+          })
+          .then(function (data) {
+            naytaTiedot(data);
+          })
+          .catch(function (error) {
+            document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan (" + error.message + ")</p>";
+          });
+
+        // 2. Funktio, joka muodostaa HTML-sisällön
+        function naytaTiedot(data) {
+          let tiedot = "<h1>Toteutus: " + data.toteutusNimi + "</h1>";
+          tiedot += "<p><img src='" + data.kuva + "' alt='Toteutuksen kuva'></p>";
+          
+          tiedot += "<p><b>Aika:</b> " + data.alkamisaika + " – " + data.loppumisaika + "</p>";
+          tiedot += "<p><b>Kesto:</b> " + data.kestoViikkoina + " viikkoa</p>";
+          tiedot += "<p><b>Osallistujien määrä:</b> " + data.osallistujatLkm + " kpl</p>";
+
+          tiedot += "<h3>Osallistujat</h3><ul>";
+
+          // Käydään läpi osallistujat-taulukko silmukan (for) avulla
+          for (var i = 0; i < data.osallistujat.length; i++) {
+            tiedot += "<li>" + data.osallistujat[i] + "</li>";
+          }
+
+          tiedot += "</ul>";
+
+          // Kirjoitetaan valmis HTML sivulle
+          document.getElementById("vastaus").innerHTML = tiedot;
+        }
+    </script>
+</body>
+</html>
