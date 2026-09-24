@@ -2,82 +2,10 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>JSON Example</title>
-  <link rel="stylesheet" href="../styles.css">
-  <style>
-    body { max-width: 900px; margin: 0 auto; padding: 1rem; font-family: Arial, sans-serif; }
-    header { margin-bottom: 2rem; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .lead { color: #555; margin-bottom: 1.5rem; }
-    img { margin: 1rem 0; border-radius: 4px; }
-    section { margin-bottom: 2rem; }
-    ul { margin-left: 1.2rem; }
-    a { color: #0b5ed7; }
-    a:hover { text-decoration: underline; }
-    footer { margin-top: 3rem; font-size: 0.9rem; color: #777; border-top: 1px solid #ddd; padding-top: 0.5rem; }
-  </style>
+  <title>Testi</title>
 </head>
 <body>
-
-<header>
-  <h1>JSON Example</h1>
-  <p class="lead">Tällä sivulla näytetään JSON-tiedoston <code>tietue.json</code> sisältö.</p>
-</header>
-
-<section id="perus">
-  <h2>Perustiedot</h2>
-  <div id="perus-sisalto"></div>
-</section>
-
-<section id="opintojakso">
-  <h2>Opintojakso</h2>
-  <div id="opintojakso-sisalto"></div>
-</section>
-
-<section id="tekniikat">
-  <h2>Tekniikat</h2>
-  <div id="tekniikat-sisalto"></div>
-</section>
-
-<footer>
-  <p>JSON-esimerkki &mdash; Digitekniikat / GitHub Pages</p>
-</footer>
-
-<script>
-  fetch("tietue.json")
-    .then(response => response.json())
-    .then(data => {
-      // Perustiedot
-      document.getElementById("perus-sisalto").innerHTML = `
-        <h3>${data.otsikko}</h3>
-        <p>${data.kuvaus}</p>
-        <img src="${data.kuva}" alt="Kuva" width="300">
-      `;
-
-      // Opintojakso
-      document.getElementById("opintojakso-sisalto").innerHTML = `
-        <p><strong>Nimi:</strong> ${data.opintojakso.nimi}</p>
-        <p><strong>Tunnus:</strong> ${data.opintojakso.tunnus}</p>
-        <p><strong>Opintopisteet:</strong> ${data.opintojakso.opintopisteet}</p>
-        <h3>Sisältö</h3>
-        <ul>
-          ${data.opintojakso.sisalto.map(aihe => `<li>${aihe}</li>`).join("")}
-        </ul>
-      `;
-
-      // Tekniikat
-      document.getElementById("tekniikat-sisalto").innerHTML = `
-        <ul>
-          ${data.tekniikat.map(t => `<li><a href="${t.linkki}" target="_blank">${t.aihe}</a></li>`).join("")}
-        </ul>
-      `;
-    })
-    .catch(err => {
-      document.body.innerHTML += "<p>Virhe JSON-datan latauksessa.</p>";
-      console.error(err);
-    });
-</script>
-
+  <h1>JSON-sivu toimii</h1>
+  <p>Jos näet tämän tekstin, HTML toimii.</p>
 </body>
 </html>
-
