@@ -39,7 +39,7 @@
 </head>
 <body>
 
-    <!-- Navigaatio (Korjatuilla linkeillä ja li-tägeillä) -->
+    <!-- Navigaatio -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Digitekniikat</a>
@@ -58,7 +58,7 @@
                         <a class="nav-link active" href="pokemon.html">Poke haku (Tehtävä 2 OSA 1)</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pokemon.html?autokaannos=true">Tehtävä 2 OSA 2</a>
+                        <a class="nav-link active" href="pokemon.html">Tehtävä 2 OSA 2</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="saa.html">Tehtävä 3</a>
@@ -88,9 +88,9 @@
             <div id="vastaus">
                 <div id="nimi" class="fw-bold fs-4 text-primary">Kirjoita laatikkoon Pokemonin nimi</div>
                 <p id="kuva2"></p>
-                <!-- Paikka Käännä-painikkeelle -->
+                <!-- Paikka Käännä-painikkeelle (OSA II) -->
                 <div id="kaannaNappi"></div>
-                <!-- Paikka 3 lisäominaisuudelle -->
+                <!-- Paikka 3 lisäominaisuudelle (OSA II) -->
                 <div id="ominaisuudet" class="mt-3"></div>
             </div>
         </div>
@@ -104,16 +104,8 @@
         let nykyinenObj = null;
         let pokenNimi = "";
 
-        // Tarkistetaan sivun latautuessa, ollaanko tultu "Tehtävä 2 OSA 2" -linkistä
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('autokaannos') === 'true') {
-                document.getElementById("pokemonName").value = "eevee";
-                poke(true); // Suoritetaan haku ja käännös automaattisesti
-            }
-        };
-
-        function poke(autokaannos = false) {
+        // TEHTÄVÄ 2 OSA 1: Haetaan Pokemonin tiedot
+        function poke() {
             const pokeName = document.getElementById("pokemonName").value.toLowerCase().trim();
             pokenNimi = document.getElementById("pokemonName").value;
 
@@ -122,6 +114,7 @@
                 return;
             }
 
+            // Tyhjennetään edellisen haun kääntönappi ja ominaisuudet
             document.getElementById("kaannaNappi").innerHTML = "";
             document.getElementById("ominaisuudet").innerHTML = "";
             document.getElementById("nimi").innerHTML = "Haetaan tietoja...";
@@ -135,10 +128,6 @@
               })
               .then(function (responseJson) {
                 pokekuva(responseJson);
-                // Jos tultiin OSA 2 -linkistä, suoritetaan kääntäminen automaattisesti
-                if (autokaannos) {
-                    kaanna();
-                }
               })
               .catch(function (error) {
                 document.getElementById("nimi").innerHTML = "<b class='text-danger'>Tietoa ei pystytä hakemaan</b>";
@@ -146,6 +135,7 @@
               });
         }
 
+        // Näytetään Pokemon edestä päin (OSA 1) ja luodaan Käännä-painike (OSA 2 varten)
         function pokekuva(obj) {
             nykyinenObj = obj;
 
@@ -155,16 +145,20 @@
             document.getElementById("nimi").innerHTML = "<b>" + pokenNimi.toUpperCase() + "</b>";
             document.getElementById("pokemonName").value = "";
 
+            // Tuodaan "Käännä"-painike näkyviin vasta haun jälkeen
             document.getElementById("kaannaNappi").innerHTML = 
                 "<button onclick='kaanna()' class='btn btn-outline-primary mt-2'>Käännä</button>";
         }
 
+        // TEHTÄVÄ 2 OSA 2: Käännetään kuva ja näytetään 3 ominaisuutta
         function kaanna() {
             if (!nykyinenObj) return;
 
+            // Vaihdetaan kuva selkäpuolelle
             let backUrl = nykyinenObj.sprites.back_default || nykyinenObj.sprites.front_default;
             document.getElementById("kuva2").innerHTML = "<img src='" + backUrl + "' alt='Pokemon selin'>";
 
+            // Haetaan ominaisuudet (pituus, paino, peruskokemus)
             let height = nykyinenObj.height;
             let weight = nykyinenObj.weight;
             let baseExp = nykyinenObj.base_experience;
