@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitekniikat - Sää Helsingissä</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .navbar-custom {
+            background-color: #0d6efd;
+        }
+        .main-container {
+            background: #ffffff;
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Sääkortin muotoilu */
+        .weather-card {
+            background: #eef5ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #0d6efd;
+            margin-top: 15px;
+        }
+        #saaKuva img {
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigaatio -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="index.html">Digitekniikat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Tehtävä 1 OSA 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="toteutus.html">Tehtävä 1 OSA 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pokemon.html">Tehtävä 2 (Poke Haku)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="saa.html">Tehtävä 3 (Sää)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sisältöalue -->
+    <div class="container">
+        <div class="main-container">
+            <h1>Sää Helsingissä</h1>
+            <!-- Paikka latausajan esittämiseen -->
+            <p id="kellonaika" class="text-muted fw-bold"></p>
+
+            <div id="vastaus">
+                <p>Ladataan säätietoja...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript säätietojen hakemiseen -->
+    <script>
+        // 1. Näytetään kellonaika, kun sivu on ladattu (Dia 3)
+        const nyt = new Date();
+        const tunnit = String(nyt.getHours()).padStart(2, '0');
+        const minutit = String(nyt.getMinutes()).padStart(2, '0');
+        document.getElementById("kellonaika").innerText = "Sää kello " + tunnit + ":" + minutit;
+
+        // 2. OpenWeather API URL Helsingin säätiedoille (Dia 2)
+        const url = "https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric";
+
+        // 3. Haetaan säädata fetchillä (Dia 2)
+        fetch(url)
+          .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Säätietojen haku epäonnistui");
+            }
+            return response.json();
+          })
+          .then(function (data) {
+            naytaSaa(data);
+          })
+          .catch(function (error) {
+            document.getElementById("vastaus").innerHTML = "<p class='text-danger'>Tietoa ei pystytä hakemaan (" + error.message + ")</p>";
+          });
+
+        // 4. Funktio säätietojen tulostamiseen sivulle (Dia 3)
+        function naytaSaa(data) {
+          // Luetaan halutut arvot OpenWeather JSON-oliosta
+          let kuvaus = data.weather[0].description;
+          let lampotila = data.main.temp;
+          let tuuli = data.wind.speed;
+          let iconKoodi = data.weather[0].icon;
+          let kuvaUrl = "https://openweathermap.org/img/wn/" + iconKoodi + "@2x.png";
+
+          // Rakennetaan HTML-muotoilu (Dia 3)
+          let html = "<div class='weather-card'>";
+          html += "<p id='saaKuva'><img src='" + kuvaUrl + "' alt='" + kuvaus + "'></p>";
+          html += "<p><b>Sää:</b> " + kuvaus + "</p>";
+          html += "<p><b>Lämpötila:</b> " + lampotila + " °C</p>";
+          html += "<p><b>Tuuli:</b> " + tuuli + " m/s</p>";
+          html += "</div>";
+
+          document.getElementById("vastaus").innerHTML = html;
+        }
+    </script>
+</body>
+</html>
