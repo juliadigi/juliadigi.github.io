@@ -3,25 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>JSON-tehtävä</title>
+    <!-- Voit lisätä head-osioon Bootstrap-linkit tarvittaessa -->
 </head>
 <body>
 
-    <!-- HTML-elementit, joihin data sijoitetaan -->
-    <h1 id="otsikko"></h1>
-    <p id="kuvaus"></p>
-    <img id="kuva" src="" alt="Digi kuva">
+    <!-- Paikka, johon JavaScript kirjoittaa tiedot -->
+    <div id="vastaus"></div>
 
-    <!-- JavaScript-koodi lisätään tänne ennen body-tägin sulkeutumista -->
     <script>
-        fetch('tietue.json')
-          .then(response => response.json())
-          .then(data => {
-            // Asetetaan haettu data HTML-elementteihin
-            document.getElementById("otsikko").innerText = data.otsikko;
-            document.getElementById("kuvaus").innerText = data.kuvaus;
-            document.getElementById("kuva").src = data.kuva;
+        // 1. Tiedon haku JSON-tietueesta (dia 4)
+        fetch('tietue.JSON')
+          .then(function (response) {
+            return response.json();
           })
-          .catch(error => console.error('Virhe:', error));
+          .then(function (responseJson) {
+            kerro(responseJson);
+          })
+          .catch(function (error) {
+            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+          });
+
+        // 2. kerro()-funktio (diat 5 ja 6)
+        function kerro(obj) {
+          // Haetaan otsikko, kuvaus, kuva ja opintojakson tiedot
+          let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br><hr>";
+          tiedot += "<p><img src=" + obj.kuva + "></p>";
+          tiedot += "<h3>Opintojakso</h3>";
+          tiedot += "Nimi: " + obj.opintojakso.nimi + "<br>";
+          tiedot += "Tunnus: " + obj.opintojakso.tunnus + "<br>";
+          tiedot += "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>";
+
+          // Lisätään Aiheet-osio
+          tiedot += "<p><h3> Aiheet </h3>";
+
+          // Käydään läpi tekniikat-taulukko for-silmukalla
+          for (var i = 0; i < obj.tekniikat.length; i++) {
+            tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>";
+            tiedot += " <a href=" + obj.tekniikat[i].linkki + ">" + obj.tekniikat[i].linkki + "</a><br>";
+          }
+
+          tiedot += "</p>";
+
+          // Kirjoitetaan tiedot sivulle id="vastaus" -elementtiin
+          document.getElementById("vastaus").innerHTML = tiedot;
+        }
     </script>
 </body>
 </html>
