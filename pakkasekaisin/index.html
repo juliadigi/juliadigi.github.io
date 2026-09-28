@@ -73,6 +73,19 @@
       border-radius: 16px;
     }
 
+    /* Animaatio arpoja-laatikolle */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .question-mark {
+      font-size: 3rem;
+      animation: pulse 2s infinite ease-in-out;
+      display: inline-block;
+    }
+
     /* Modal Styling */
     .modal-content {
       background-color: var(--card-bg);
@@ -98,22 +111,29 @@
 </head>
 <body>
 
-<!-- Navigaatiopalkki (Karuselli poistettu linkeistä) -->
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary">
+<!-- Navigaatiopalkki (HAKU SIIRRETTY TÄNNE) -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary py-3">
   <div class="container">
     <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto fs-5">
+      <ul class="navbar-nav me-auto ms-lg-4 fs-5 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-warning fw-bold" href="#arvonta">🎲 Arvo päivän peli</a>
+          <a class="nav-link text-warning fw-bold" href="#arvonta">🎲 Arvo peli</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#pelit">Kaikki korttipelit</a>
+          <a class="nav-link" href="#pelit">Kaikki pelit</a>
         </li>
       </ul>
+      
+      <!-- HAKUKENTTÄ HEADERISSA -->
+      <form class="d-flex" role="search" onsubmit="return false;">
+        <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-warning" placeholder="🔍 Etsi peliä nimellä..." style="min-width: 220px;">
+      </form>
     </div>
   </div>
 </nav>
@@ -146,7 +166,7 @@
       <img src="https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Blackjack">
       <div class="carousel-caption">
         <h2 class="gold-gradient fw-bold">Blackjack</h2>
-        <p>Tavoittele lukua 21 ja voita jakaja!</p>
+        <p>Tavoittele lukuarvoa 21 ja voita jakaja!</p>
         <button onclick="haeSaannot('blackjack')" class="btn btn-gold btn-sm">Lue säännöt</button>
       </div>
     </div>
@@ -159,19 +179,21 @@
   </button>
 </div>
 
-<!-- OSA 2: Header-pikalinkki: Arvo päivän korttipeli (JSON API) -->
+<!-- OSA 2: Arvo päivän korttipeli (Animoitu laatikko & Kysymysmerkki) -->
 <div class="container my-5" id="arvonta">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       <div class="p-4 card-box shadow-lg">
         <h2 class="mb-3 gold-gradient fw-bold">🎲 Arvo päivän korttipeli</h2>
-        <p class="text-secondary">Paina painiketta ja arvomme pelin ulkoisesta rajapinnasta peli-iltaanne!</p>
+        <p class="text-secondary">Mikä peli valikoituu peli-iltaanne? Paina napista ja arvo!</p>
         
-        <div id="arvottu-peli-box" class="p-4 my-4 bg-dark rounded-3 border border-secondary text-start" style="min-height: 140px;">
-          <p class="text-center text-muted my-3">Paina alla olevaa painiketta arpoaksesi pelin...</p>
+        <div id="arvottu-peli-box" class="p-4 my-4 bg-dark rounded-3 border border-warning text-center" style="min-height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div class="question-mark">❓🃏</div>
+          <p class="text-warning fw-bold my-2">Mitä tänään pelataan?</p>
+          <span class="text-muted small">Paina alla olevaa nappia arpoaksesi pelin</span>
         </div>
 
-        <button onclick="arvoPeli()" class="btn btn-gold btn-lg fw-bold shadow fs-5">Arvo uusi peli 🎰</button>
+        <button onclick="arvoPeliAnimaatiolla()" class="btn btn-gold btn-lg fw-bold shadow fs-5">Arvo uusi peli 🎰</button>
       </div>
     </div>
   </div>
@@ -179,15 +201,9 @@
 
 <hr class="container border-secondary my-5">
 
-<!-- OSA 3: Hakukenttä & Kaikki korttipelit (10 kpl JSON-pohjaisesti) -->
+<!-- OSA 3: Kaikki korttipelit -->
 <div class="container my-5" id="pelit">
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-    <h2 class="gold-gradient fw-bold mb-3 mb-md-0">Kaikki korttipelit (10)</h2>
-    <!-- Hakukenttä -->
-    <div class="w-100 w-md-auto" style="max-width: 320px;">
-      <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-secondary" placeholder="🔍 Etsi peliä nimellä...">
-    </div>
-  </div>
+  <h2 class="gold-gradient fw-bold mb-4 text-center text-md-start">Kaikki korttipelit (10)</h2>
 
   <div class="row g-4 justify-content-center" id="pelit-grid">
     <div class="text-center py-5">
@@ -297,21 +313,38 @@
     }
   }
 
-  // Arvotaan peli
-  function arvoPeli() {
+  // Arvontatoiminto pyörivällä animaatiolla
+  function arvoPeliAnimaatiolla() {
     const avaimet = Object.keys(kaikkiPelitData);
     if (avaimet.length === 0) return;
 
-    const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
-    const peli = kaikkiPelitData[satunnainenAvain];
-
     const laatikko = document.getElementById("arvottu-peli-box");
-    laatikko.innerHTML = `
-      <h3 class="text-warning fw-bold mb-2">${peli.nimi}</h3>
-      <p class="mb-1"><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
-      <p class="mb-3"><strong>Tavoite:</strong> ${peli.tavoite}</p>
-      <button onclick="haeSaannot('${satunnainenAvain}')" class="btn btn-sm btn-gold">Katso täydet säännöt 📖</button>
-    `;
+    const symbolit = ["♠️", "♥️", "♦️", "♣️", "🃏", "🎲"];
+    let laskuri = 0;
+
+    // Pyörivä animaatio ennen lopullista tulosta
+    const rullaaja = setInterval(() => {
+      const satunnainenSymboli = symbolit[Math.floor(Math.random() * symbolit.length)];
+      laatikko.innerHTML = `
+        <div style="font-size: 2.5rem;" class="text-warning fw-bold">${satunnainenSymboli}</div>
+        <p class="text-light fw-bold my-1">Arotaan peliä...</p>
+      `;
+      laskuri++;
+
+      if (laskuri > 10) {
+        clearInterval(rullaaja);
+        // Näytetään arvottu peli
+        const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
+        const peli = kaikkiPelitData[satunnainenAvain];
+
+        laatikko.innerHTML = `
+          <h3 class="text-warning fw-bold mb-2">${peli.nimi}</h3>
+          <p class="mb-1 text-light"><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
+          <p class="mb-3 text-secondary">${peli.tavoite}</p>
+          <button onclick="haeSaannot('${satunnainenAvain}')" class="btn btn-sm btn-gold">Katso täydet säännöt 📖</button>
+        `;
+      }
+    }, 100);
   }
 </script>
 
