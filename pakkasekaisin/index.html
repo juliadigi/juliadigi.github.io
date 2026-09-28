@@ -111,7 +111,7 @@
 </head>
 <body>
 
-<!-- Navigaatiopalkki (HAKU SIIRRETTY TÄNNE) -->
+<!-- Navigaatiopalkki -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary py-3">
   <div class="container">
     <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
@@ -130,13 +130,21 @@
         </li>
       </ul>
       
-      <!-- HAKUKENTTÄ HEADERISSA -->
+      <!-- Hakukenttä Headerissa -->
       <form class="d-flex" role="search" onsubmit="return false;">
         <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-warning" placeholder="🔍 Etsi peliä nimellä..." style="min-width: 220px;">
       </form>
     </div>
   </div>
 </nav>
+
+<!-- SÄÄINFO - PELI-ILLAN SÄÄKOMPASSI (Open-Meteo JSON API) -->
+<div class="container mt-4">
+  <div id="saa-banneri" class="p-3 bg-dark rounded-4 border border-info text-center shadow-sm">
+    <div class="spinner-border text-info spinner-border-sm" role="status"></div>
+    <span class="ms-2 text-secondary">Tarkistetaan peli-illan säätä ulkoisesta rajapinnasta...</span>
+  </div>
+</div>
 
 <!-- OSA 1: Bootstrap Kuvakaruselli -->
 <div class="carousel slide my-4 container" id="esittelyKaruselli" data-bs-ride="carousel">
@@ -147,7 +155,7 @@
   </div>
   <div class="carousel-inner rounded-4 shadow-lg border border-secondary">
     <div class="carousel-item active">
-      <img src="https://images.unsplash.com/photo-1626775238053-4315516eedc9?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Pokeri">
+      <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Pokeri">
       <div class="carousel-caption">
         <h2 class="gold-gradient fw-bold">Texas Hold'em Pokeri</h2>
         <p>Klassinen taktiikka- ja panostuspeli peli-iltoihin.</p>
@@ -163,7 +171,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1618304925090-b68a8c744cbe?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Blackjack">
+      <img src="https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Blackjack">
       <div class="carousel-caption">
         <h2 class="gold-gradient fw-bold">Blackjack</h2>
         <p>Tavoittele lukuarvoa 21 ja voita jakaja!</p>
@@ -179,7 +187,7 @@
   </button>
 </div>
 
-<!-- OSA 2: Arvo päivän korttipeli (Animoitu laatikko & Kysymysmerkki) -->
+<!-- OSA 2: Arvo päivän korttipeli (JSON API) -->
 <div class="container my-5" id="arvonta">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
@@ -201,7 +209,7 @@
 
 <hr class="container border-secondary my-5">
 
-<!-- OSA 3: Kaikki korttipelit -->
+<!-- OSA 3: Kaikki korttipelit (10 kpl) -->
 <div class="container my-5" id="pelit">
   <h2 class="gold-gradient fw-bold mb-4 text-center text-md-start">Kaikki korttipelit (10)</h2>
 
@@ -245,9 +253,41 @@
   document.addEventListener("DOMContentLoaded", function() {
     saannotModal = new bootstrap.Modal(document.getElementById('saannotModal'));
     lataaKaikkiPelit();
+    lataaSaaInfo();
   });
 
-  // Haetaan kaikki 10 peliä JSON-rajapinnasta ja luodaan kortit dynaamisesti
+  // Haetaan sääennuste Open-Meteo JSON API:sta
+  function lataaSaaInfo() {
+    const saaUrl = "https://api.open-meteo.com/v1/forecast?latitude=60.1695&longitude=24.9354&current_weather=true";
+
+    fetch(saaUrl)
+      .then(res => res.json())
+      .then(data => {
+        const weather = data.current_weather;
+        const temp = Math.round(weather.temperature);
+        const code = weather.weathercode;
+
+        const onSadetta = code >= 51 || temp < 10;
+        const saaElementti = document.getElementById("saa-banneri");
+
+        if (onSadetta) {
+          saaElementti.className = "p-3 bg-dark rounded-4 border border-warning text-center shadow-sm";
+          saaElementti.innerHTML = `
+            <span class="fs-5">🌧️ <strong>Sää tänään: ${temp}°C ja sateista/viileää!</strong> Täydellinen ilta jäädä sisälle ja ottaa korttipeli-ilta! 🃏</span>
+          `;
+        } else {
+          saaElementti.className = "p-3 bg-dark rounded-4 border border-success text-center shadow-sm";
+          saaElementti.innerHTML = `
+            <span class="fs-5">☀️ <strong>Sää tänään: ${temp}°C ja leppoisaa!</strong> Ota korttipakka mukaan terassille tai puistoon! 🃏</span>
+          `;
+        }
+      })
+      .catch(err => {
+        document.getElementById("saa-banneri").innerHTML = "<span class='text-muted'>Säätietoja ei voitu ladata, mutta korttipeli-ilta toimii aina! 🃏</span>";
+      });
+  }
+
+  // Haetaan kaikki 10 peliä JSON-rajapinnasta
   function lataaKaikkiPelit() {
     fetch(jsonUrl)
       .then(response => response.json())
@@ -322,18 +362,16 @@
     const symbolit = ["♠️", "♥️", "♦️", "♣️", "🃏", "🎲"];
     let laskuri = 0;
 
-    // Pyörivä animaatio ennen lopullista tulosta
     const rullaaja = setInterval(() => {
       const satunnainenSymboli = symbolit[Math.floor(Math.random() * symbolit.length)];
       laatikko.innerHTML = `
         <div style="font-size: 2.5rem;" class="text-warning fw-bold">${satunnainenSymboli}</div>
-        <p class="text-light fw-bold my-1">Arotaan peliä...</p>
+        <p class="text-light fw-bold my-1">Arvotaan peliä...</p>
       `;
       laskuri++;
 
       if (laskuri > 10) {
         clearInterval(rullaaja);
-        // Näytetään arvottu peli
         const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
         const peli = kaikkiPelitData[satunnainenAvain];
 
