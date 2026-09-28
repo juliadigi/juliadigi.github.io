@@ -18,7 +18,7 @@
     "pelaajamaara": "3–6 henkilöä",
     "tavoite": "Päästä eroon kaikista korteista paitsi Patamaijasta (♠Q).",
     "saannot": "Kortteja pelataan pöytään ja niitä yritetään kaataa valitulla valttimaalla tai suuremmalla saman maan kortilla. Se, jolle jää käteen Patamaija pelin päättyessä, häviää.",
-    "kuva": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=600&q=80"
   },
   "pokeri": {
     "nimi": "♠️ Texas Hold'em Pokeri",
@@ -32,7 +32,7 @@
     "pelaajamaara": "1–7 henkilöä vs. Jakaja",
     "tavoite": "Päästä korttien yhteissummalla mahdollisimman lähelle lukua 21 menemättä sen yli.",
     "saannot": "Kuvakortit ovat 10, ässä on 1 tai 11. Jos kätesi arvo ylittää 21, häviät välittömästi. Jakajan täytyy ottaa kortti lukuun 16 asti ja jäädä vähintään 17 kohdalla.",
-    "kuva": "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
   },
   "uno": {
     "nimi": "🔴 Uno",
@@ -60,13 +60,13 @@
     "pelaajamaara": "3–6 henkilöä",
     "tavoite": "Parittaa kaikki kortit ja välttää yksinäisen Mustan Pekan jäämistä käteen.",
     "saannot": "Pelaajat nostavat vuorotellen kortteja toistensa käsistä ja muodostavat pareja. Peli päättyy kun kaikki parit on muodostettu ja se, jolle Musta Pekka jää, häviää.",
-    "kuva": "https://images.unsplash.com/photo-1543599538-78c4f692f184?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80"
   },
   "tikki": {
     "nimi": "♠️ Tikki",
     "pelaajamaara": "3–4 henkilöä",
     "tavoite": "Voittaa tietty määrä tikkejä sovittujen sääntöjen mukaisesti.",
     "saannot": "Maapakko on voimassa: pelaajan on pelattava samaa maata kuin ajokortti jos mahdollista. Suurin kortti pelattua maata (tai valttia) voittaa tikin.",
-    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80"
   }
 }
