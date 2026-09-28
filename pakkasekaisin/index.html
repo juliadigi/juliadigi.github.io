@@ -4,69 +4,114 @@
   <title>Pakka Sekaisin - Korttipelit & Säännöt</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts (Kasinoteemainen Cinzel-fontti) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <style>
+    :root {
+      --bg-dark: #080d1a;
+      --card-bg: #111a2e;
+      --accent-gold: #d4af37;
+      --accent-cyan: #00f2fe;
+    }
+
     body {
-      background-color: #0b132b;
-      color: #f4f5f6;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
     }
-    .hero-header {
-      background: linear-gradient(135deg, #1c2541 0%, #0b132b 100%);
-      padding: 70px 20px 50px;
-      border-bottom: 2px solid #3a506b;
+
+    h1, h2, h3, h4, .navbar-brand, .gold-text {
+      font-family: 'Cinzel', serif;
     }
+
+    .gold-gradient {
+      background: linear-gradient(45deg, #d4af37, #f3e5ab);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Carousel Custom Styling */
+    .carousel-item img {
+      height: 380px;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+    .carousel-caption {
+      background: rgba(8, 13, 26, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 20px;
+    }
+
+    /* Game Card Styling */
     .card-game {
-      background-color: #1c2541;
-      border: 1px solid #3a506b;
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #ffffff;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       overflow: hidden;
     }
     .card-game:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      border-color: var(--accent-gold);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
     }
     .card-game img {
       height: 180px;
       object-fit: cover;
-      width: 100%;
     }
+
     .card-box {
-      background-color: #1c2541;
-      border: 2px dashed #5bc0be;
+      background-color: var(--card-bg);
+      border: 2px dashed var(--accent-gold);
       border-radius: 16px;
     }
+
+    /* Modal Styling */
     .modal-content {
-      background-color: #1c2541;
+      background-color: var(--card-bg);
       color: #ffffff;
-      border: 1px solid #5bc0be;
+      border: 1px solid var(--accent-gold);
       border-radius: 16px;
     }
-    .modal-header {
-      border-bottom: 1px solid #3a506b;
+    .modal-header, .modal-footer {
+      border-color: rgba(255, 255, 255, 0.1);
     }
-    .modal-footer {
-      border-top: 1px solid #3a506b;
+
+    .btn-gold {
+      background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+      color: #000;
+      font-weight: bold;
+      border: none;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+      color: #000;
     }
   </style>
 </head>
 <body>
 
 <!-- Navigaatiopalkki -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top border-bottom border-secondary">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary">
   <div class="container">
-    <a class="navbar-brand fw-bold text-danger fs-3" href="#">🃏 Pakka Sekaisin</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+    <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto fs-5">
         <li class="nav-item">
-          <a class="nav-link active" href="#arvonta">Arvo peli</a>
+          <a class="nav-link text-warning fw-bold" href="#arvonta">🎲 Arvo päivän peli</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#esittely">Karuselli</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#pelit">Kaikki korttipelit</a>
@@ -76,25 +121,60 @@
   </div>
 </nav>
 
-<!-- Hero / Esittelyosio -->
-<div class="container-fluid hero-header text-center">
-  <h1 class="display-3 fw-bold text-light">Pakka Sekaisin!</h1>
-  <p class="lead text-info">Löydä suosituimpien korttipelien säännöt tai arvo sopiva peli peli-iltaan.</p> 
+<!-- OSA 1: Bootstrap Kuvakaruselli -->
+<div id="esittely" class="carousel slide my-4 container" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#esittely" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#esittely" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#esittely" data-bs-slide-to="2"></button>
+  </div>
+  <div class="carousel-inner rounded-4 shadow-lg border border-secondary">
+    <div class="carousel-item active">
+      <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Pokeri">
+      <div class="carousel-caption">
+        <h2 class="gold-gradient fw-bold">Texas Hold'em Pokeri</h2>
+        <p>Klassinen taktiikka- ja panostuspeli peli-iltoihin.</p>
+        <button onclick="haeSaannot('pokeri')" class="btn btn-gold btn-sm">Lue säännöt</button>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Ristiseiska">
+      <div class="carousel-caption">
+        <h2 class="gold-gradient fw-bold">Ristiseiska</h2>
+        <p>Suomalaisten ikisuosikki kaikenikäisille.</p>
+        <button onclick="haeSaannot('ristiseiska')" class="btn btn-gold btn-sm">Lue säännöt</button>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Blackjack">
+      <div class="carousel-caption">
+        <h2 class="gold-gradient fw-bold">Blackjack</h2>
+        <p>Tavoittele lukua 21 ja voita jakaja!</p>
+        <button onclick="haeSaannot('blackjack')" class="btn btn-gold btn-sm">Lue säännöt</button>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#esittely" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#esittely" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
 </div>
 
-<!-- OSA 1: Arvo päivän korttipeli (JSON API) -->
+<!-- OSA 2: Header-pikalinkki: Arvo päivän korttipeli (JSON API) -->
 <div class="container my-5" id="arvonta">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       <div class="p-4 card-box shadow-lg">
-        <h2 class="mb-3 text-light fw-bold">🎲 Arvo päivän korttipeli</h2>
-        <p class="text-secondary">Etkö osaa päättää mitä pelaisitte? Paina painiketta ja arvomme pelin ulkoisesta rajapinnasta!</p>
+        <h2 class="mb-3 gold-gradient fw-bold">🎲 Arvo päivän korttipeli</h2>
+        <p class="text-secondary">Paina painiketta ja arvomme pelin ulkoisesta rajapinnasta peli-iltaanne!</p>
         
-        <div id="arvottu-peli-box" class="p-4 my-4 bg-dark rounded-3 border border-secondary text-start" style="min-height: 160px;">
-          <p class="text-center text-muted my-4">Paina painiketta arpoaksesi peli-illan korttipelin!</p>
+        <div id="arvottu-peli-box" class="p-4 my-4 bg-dark rounded-3 border border-secondary text-start" style="min-height: 140px;">
+          <p class="text-center text-muted my-3">Paina alla olevaa painiketta arpoaksesi pelin...</p>
         </div>
 
-        <button onclick="arvoPeli()" class="btn btn-warning btn-lg fw-bold shadow text-dark fs-5">Arvo uusi peli 🎲</button>
+        <button onclick="arvoPeli()" class="btn btn-gold btn-lg fw-bold shadow fs-5">Arvo uusi peli 🎰</button>
       </div>
     </div>
   </div>
@@ -102,54 +182,26 @@
 
 <hr class="container border-secondary my-5">
 
-<!-- OSA 2: Korttipelit & Ulkoinen JSON API -säännöt -->
+<!-- OSA 3: Hakukenttä & Kaikki korttipelit (10 kpl JSON-pohjaisesti) -->
 <div class="container my-5" id="pelit">
-  <h2 class="text-center mb-4 text-light fw-bold">Valitse korttipeli ja lue säännöt</h2>
-  <p class="text-center text-secondary mb-5">Klikkaa peliä hakeaksesi säännöt ulkoisesta rajapinnasta dynaamisesti.</p>
-
-  <div class="row g-4 justify-content-center">
-    
-    <!-- Peli 1: Ristiseiska -->
-    <div class="col-md-4">
-      <div class="card card-game h-100 shadow">
-        <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80" alt="Ristiseiska">
-        <div class="card-body d-flex flex-column">
-          <h4 class="card-title fw-bold text-warning">♣️ Ristiseiska</h4>
-          <p class="card-text text-secondary">Klassinen suomalainen korttipeli, jossa tavoitteena on päästä korteista eroon rakentamalla pinoja.</p>
-          <button onclick="haeSaannot('ristiseiska')" class="btn btn-outline-info mt-auto fw-bold">Lue säännöt 📖</button>
-        </div>
-      </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+    <h2 class="gold-gradient fw-bold mb-3 mb-md-0">Kaikki korttipelit (10)</h2>
+    <!-- Tekniikka 1: Reaaliaikainen hakukenttä -->
+    <div class="w-100 w-md-auto" style="max-width: 320px;">
+      <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-secondary" placeholder="🔍 Etsi peliä nimellä...">
     </div>
+  </div>
 
-    <!-- Peli 2: Paskahousu -->
-    <div class="col-md-4">
-      <div class="card card-game h-100 shadow">
-        <img src="https://images.unsplash.com/photo-1541278107931-e006523892df?auto=format&fit=crop&w=600&q=80" alt="Paskahousu">
-        <div class="card-body d-flex flex-column">
-          <h4 class="card-title fw-bold text-warning">♦️ Paskahousu</h4>
-          <p class="card-text text-secondary">Vauhdikas peli, jossa yritetään välttää viimeiseksi jäämistä. Erikoiskortit sekoittavat pakkaa!</p>
-          <button onclick="haeSaannot('paskahousu')" class="btn btn-outline-info mt-auto fw-bold">Lue säännöt 📖</button>
-        </div>
-      </div>
+  <div class="row g-4 justify-content-center" id="pelit-grid">
+    <div class="text-center py-5">
+      <div class="spinner-border text-warning" role="status"></div>
+      <p class="mt-2 text-secondary">Ladataan pelejä ulkoisesta rajapinnasta...</p>
     </div>
-
-    <!-- Peli 3: Maija -->
-    <div class="col-md-4">
-      <div class="card card-game h-100 shadow">
-        <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80" alt="Maija">
-        <div class="card-body d-flex flex-column">
-          <h4 class="card-title fw-bold text-warning">♥️ Maija</h4>
-          <p class="card-text text-secondary">Perinteikäs tikkipeli, jossa varotaan joutumasta Patamaijan (♠Q) omistajaksi pelin päättyessä.</p>
-          <button onclick="haeSaannot('maija')" class="btn btn-outline-info mt-auto fw-bold">Lue säännöt 📖</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
 <!-- Bootstrap Modal pelisäännöille -->
-<div class="modal fade" id="saannotModal" tabindex="-1" aria-labelledby="saannotModalLabel" aria-hidden="true">
+<div class="modal fade" id="saannotModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -157,12 +209,7 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Sulje"></button>
       </div>
       <div class="modal-body fs-5" id="modalPelinSisalto">
-        <div class="text-center py-4">
-          <div class="spinner-border text-info" role="status">
-            <span class="visually-hidden">Ladataan sääntöjä...</span>
-          </div>
-          <p class="mt-2 text-secondary">Haetaan sääntöjä ulkoisesta JSON-rajapinnasta...</p>
-        </div>
+        <!-- Sisältö ladataan dynaamisesti -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sulje</button>
@@ -179,77 +226,95 @@
 <!-- JavaScript -->
 <script>
   let saannotModal;
+  let kaikkiPelitData = {};
   const jsonUrl = "https://raw.githubusercontent.com/juliadigi/juliadigi.github.io/main/pakkasekaisin/saannot.json";
 
   document.addEventListener("DOMContentLoaded", function() {
     saannotModal = new bootstrap.Modal(document.getElementById('saannotModal'));
+    lataaKaikkiPelit();
   });
 
-  // Haetaan pelisäännöt ulkoisesta RAW JSON -rajapinnasta Modal-ikkunaan
-  function haeSaannot(peliAvain) {
-    document.getElementById("modalPelinNimi").innerText = "Ladataan...";
-    document.getElementById("modalPelinSisalto").innerHTML = `
-      <div class="text-center py-4">
-        <div class="spinner-border text-info" role="status"></div>
-        <p class="mt-2 text-secondary">Haetaan sääntöjä JSON-rajapinnasta...</p>
-      </div>`;
-    
-    saannotModal.show();
-
+  // Haetaan kaikki 10 peliä JSON-rajapinnasta ja luodaan kortit dynaamisesti
+  function lataaKaikkiPelit() {
     fetch(jsonUrl)
-      .then(response => {
-        if (!response.ok) throw new Error("Sääntöjen haku epäonnistui");
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        const peli = data[peliAvain];
-        if (peli) {
-          document.getElementById("modalPelinNimi").innerText = peli.nimi;
-          document.getElementById("modalPelinSisalto").innerHTML = `
-            <p><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
-            <p><strong>Tavoite:</strong> ${peli.tavoite}</p>
-            <hr class="border-secondary">
-            <p><strong>Säännöt & Pelin kulku:</strong></p>
-            <p>${peli.saannot}</p>
-          `;
-        } else {
-          document.getElementById("modalPelinSisalto").innerHTML = "<p class='text-danger'>Pelin sääntöjä ei löytynyt.</p>";
-        }
+        kaikkiPelitData = data;
+        paivitaPeliGrid(data);
       })
       .catch(error => {
-        document.getElementById("modalPelinSisalto").innerHTML = "<p class='text-danger'>Virhe ladattaessa sääntöjä ulkoisesta palvelimesta.</p>";
+        document.getElementById("pelit-grid").innerHTML = "<p class='text-danger text-center'>Pelejä ei saatu ladattua.</p>";
       });
   }
 
-  // Arvotaan satunnainen korttipeli JSON-rajapinnasta
+  function paivitaPeliGrid(pelit) {
+    const grid = document.getElementById("pelit-grid");
+    grid.innerHTML = "";
+
+    Object.keys(pelit).forEach(avain => {
+      const peli = pelit[avain];
+      grid.innerHTML += `
+        <div class="col-md-4 peli-kortti-wrapper" data-nimi="${peli.nimi.toLowerCase()}">
+          <div class="card card-game h-100 shadow">
+            <img src="${peli.kuva}" alt="${peli.nimi}">
+            <div class="card-body d-flex flex-column">
+              <h4 class="card-title fw-bold text-warning">${peli.nimi}</h4>
+              <p class="card-text text-secondary small mb-2"><strong>Pelaajia:</strong> ${peli.pelaajamaara}</p>
+              <p class="card-text text-secondary">${peli.tavoite}</p>
+              <button onclick="haeSaannot('${avain}')" class="btn btn-outline-warning mt-auto fw-bold">Lue säännöt 📖</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // Hakutoiminto
+  function suodataPelit() {
+    const hakusana = document.getElementById("hakukentta").value.toLowerCase();
+    const kortit = document.querySelectorAll(".peli-kortti-wrapper");
+
+    kortit.forEach(kortti => {
+      const nimi = kortti.getAttribute("data-nimi");
+      if (nimi.includes(hakusana)) {
+        kortti.style.display = "block";
+      } else {
+        kortti.style.display = "none";
+      }
+    });
+  }
+
+  // Haetaan yksittäisen pelin säännöt Modal-ikkunaan
+  function haeSaannot(peliAvain) {
+    const peli = kaikkiPelitData[peliAvain];
+    if (peli) {
+      document.getElementById("modalPelinNimi").innerText = peli.nimi;
+      document.getElementById("modalPelinSisalto").innerHTML = `
+        <p><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
+        <p><strong>Tavoite:</strong> ${peli.tavoite}</p>
+        <hr class="border-secondary">
+        <p><strong>Säännöt & Pelin kulku:</strong></p>
+        <p>${peli.saannot}</p>
+      `;
+      saannotModal.show();
+    }
+  }
+
+  // Arvotaan peli
   function arvoPeli() {
+    const avaimet = Object.keys(kaikkiPelitData);
+    if (avaimet.length === 0) return;
+
+    const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
+    const peli = kaikkiPelitData[satunnainenAvain];
+
     const laatikko = document.getElementById("arvottu-peli-box");
     laatikko.innerHTML = `
-      <div class="text-center py-2">
-        <div class="spinner-border text-warning" role="status"></div>
-        <p class="mt-2 text-secondary mb-0">Arvotaan peliä JSON-rajapinnasta...</p>
-      </div>`;
-
-    fetch(jsonUrl)
-      .then(response => {
-        if (!response.ok) throw new Error("Haku epäonnistui");
-        return response.json();
-      })
-      .then(data => {
-        const avaimet = Object.keys(data);
-        const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
-        const peli = data[satunnainenAvain];
-
-        laatikko.innerHTML = `
-          <h3 class="text-warning fw-bold mb-2">${peli.nimi}</h3>
-          <p class="mb-1"><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
-          <p class="mb-3"><strong>Tavoite:</strong> ${peli.tavoite}</p>
-          <button onclick="haeSaannot('${satunnainenAvain}')" class="btn btn-sm btn-info fw-bold">Katso täydet säännöt 📖</button>
-        `;
-      })
-      .catch(error => {
-        laatikko.innerHTML = "<p class='text-danger text-center my-3'>Pelin arvonta epäonnistui. Tarkista yhteys.</p>";
-      });
+      <h3 class="text-warning fw-bold mb-2">${peli.nimi}</h3>
+      <p class="mb-1"><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
+      <p class="mb-3"><strong>Tavoite:</strong> ${peli.tavoite}</p>
+      <button onclick="haeSaannot('${satunnainenAvain}')" class="btn btn-sm btn-gold">Katso täydet säännöt 📖</button>
+    `;
   }
 </script>
 
