@@ -25,48 +25,48 @@
     "pelaajamaara": "2–10 henkilöä",
     "tavoite": "Muodostaa parhaan viiden kortin käden kahdesta omasta ja viidestä pöytäkortista.",
     "saannot": "Pelaajille jaetaan kaksi piilokorttia. Panostuskierrosten aikana pöytään avataan 5 yhteistä korttia (Flop, Turn, River). Paras käsi tai viimeinen mukana oleva pelaaja voittaa potin.",
-    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1626775238053-4315516eedc9?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "blackjack": {
     "nimi": "🃏 Blackjack",
     "pelaajamaara": "1–7 henkilöä vs. Jakaja",
     "tavoite": "Päästä korttien yhteissummalla mahdollisimman lähelle lukua 21 menemättä sen yli.",
     "saannot": "Kuvakortit ovat 10, ässä on 1 tai 11. Jos kätesi arvo ylittää 21, häviät välittömästi. Jakajan täytyy ottaa kortti lukuun 16 asti ja jäädä vähintään 17 kohdalla.",
-    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1618304925090-b68a8c744cbe?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "uno": {
     "nimi": "🔴 Uno",
     "pelaajamaara": "2–10 henkilöä",
     "tavoite": "Päästä eroon kaikista omista korteista yhdistämällä värejä tai numeroita.",
     "saannot": "Pelaa kortti, joka täsmää väriltään tai numeroltaan päällimmäisen kortin kanssa. Erikoiskortit voivat vaihtaa suuntaa, hypätä vuoron yli tai pakottaa muut nostamaan kortteja. Muista huutaa UNO kun sinulla on yksi kortti jäljellä!",
-    "kuva": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1556112353-ad4fb98d81e7?q=80&w=1442&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "kasino": {
     "nimi": "♦️ Kasino",
     "pelaajamaara": "2–4 henkilöä",
     "tavoite": "Kerätä pöydästä kortteja ja pisteitä erikoiskorteista (kuten Ruutu 10 ja Pata 2).",
     "saannot": "Pöydästä saalistetaan kortteja omalla käsilinjalla siten, että summat täsmäävät. Ruutu 10 (Iso Kasino) antaa 2 pistettä ja Pata 2 (Pikku Kasino) 1 pisteen.",
-    "kuva": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1541278107931-e006523892df?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "baccarat": {
     "nimi": "👑 Baccarat",
     "pelaajamaara": "1–14 henkilöä",
     "tavoite": "Veikata kumman käsi (Pelaaja vai Jakaja) pääsee lähemmäs lukuarvoa 9.",
     "saannot": "Korttien arvot lasketaan yhteen ja vain kaksoisnumeron viimeinen numero huomioidaan (esim. 7+6 = 13 -> käden arvo on 3). Ässä on 1 ja kuvakortit 0.",
-    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?q=80&w=1746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "mustapekka": {
     "nimi": "🖤 Musta Pekka",
     "pelaajamaara": "3–6 henkilöä",
     "tavoite": "Parittaa kaikki kortit ja välttää yksinäisen Mustan Pekan jäämistä käteen.",
     "saannot": "Pelaajat nostavat vuorotellen kortteja toistensa käsistä ja muodostavat pareja. Peli päättyy kun kaikki parit on muodostettu ja se, jolle Musta Pekka jää, häviää.",
-    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1708100468204-a06023bdcb9e?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   "tikki": {
     "nimi": "♠️ Tikki",
     "pelaajamaara": "3–4 henkilöä",
     "tavoite": "Voittaa tietty määrä tikkejä sovittujen sääntöjen mukaisesti.",
-    "saannot": "Maapakko on voimassa: pelaajan on pelattava samaa maata kuin ajokortti jos mahdollista. Suurin kortti pelattua maata (tai valttia) voittaa tikin.",
-    "kuva": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80"
+    "saannot": "Maapakko on voimassa: pelaajan on pelattava samaa maata jos mahdollista. Suurin kortti pelattua maata (tai valttia) voittaa tikin.",
+    "kuva": "https://images.unsplash.com/photo-1622014402888-e78d0fd790d0?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   }
 }
