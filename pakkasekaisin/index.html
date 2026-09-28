@@ -40,16 +40,6 @@
       border: 2px dashed #5bc0be;
       border-radius: 16px;
     }
-    .card-img-holder {
-      min-height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-img-holder img {
-      max-height: 200px;
-      filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.6));
-    }
     .modal-content {
       background-color: #1c2541;
       color: #ffffff;
@@ -76,10 +66,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav ms-auto fs-5">
         <li class="nav-item">
-          <a class="nav-link active" href="#pelit">Korttipelit</a>
+          <a class="nav-link active" href="#arvonta">Arvo peli</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#nosto">Nosta kortti</a>
+          <a class="nav-link" href="#pelit">Kaikki korttipelit</a>
         </li>
       </ul>
     </div>
@@ -89,10 +79,30 @@
 <!-- Hero / Esittelyosio -->
 <div class="container-fluid hero-header text-center">
   <h1 class="display-3 fw-bold text-light">Pakka Sekaisin!</h1>
-  <p class="lead text-info">Löydä suosituimpien korttipelien säännöt tai arvo satunnainen kortti peli-iltaan.</p> 
+  <p class="lead text-info">Löydä suosituimpien korttipelien säännöt tai arvo sopiva peli peli-iltaan.</p> 
 </div>
 
-<!-- OSA 1: Korttipelit & Ulkoinen JSON API -saannot -->
+<!-- OSA 1: Arvo päivän korttipeli (JSON API) -->
+<div class="container my-5" id="arvonta">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <div class="p-4 card-box shadow-lg">
+        <h2 class="mb-3 text-light fw-bold">🎲 Arvo päivän korttipeli</h2>
+        <p class="text-secondary">Etkö osaa päättää mitä pelaisitte? Paina painiketta ja arvomme pelin ulkoisesta rajapinnasta!</p>
+        
+        <div id="arvottu-peli-box" class="p-4 my-4 bg-dark rounded-3 border border-secondary text-start" style="min-height: 160px;">
+          <p class="text-center text-muted my-4">Paina painiketta arpoaksesi peli-illan korttipelin!</p>
+        </div>
+
+        <button onclick="arvoPeli()" class="btn btn-warning btn-lg fw-bold shadow text-dark fs-5">Arvo uusi peli 🎲</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="container border-secondary my-5">
+
+<!-- OSA 2: Korttipelit & Ulkoinen JSON API -säännöt -->
 <div class="container my-5" id="pelit">
   <h2 class="text-center mb-4 text-light fw-bold">Valitse korttipeli ja lue säännöt</h2>
   <p class="text-center text-secondary mb-5">Klikkaa peliä hakeaksesi säännöt ulkoisesta rajapinnasta dynaamisesti.</p>
@@ -117,7 +127,7 @@
         <img src="https://images.unsplash.com/photo-1541278107931-e006523892df?auto=format&fit=crop&w=600&q=80" alt="Paskahousu">
         <div class="card-body d-flex flex-column">
           <h4 class="card-title fw-bold text-warning">♦️ Paskahousu</h4>
-          <p class="card-text text-secondary">Vauhdikas peli, jossa yritetään välttää viimikseksi jäämistä. Erikoiskortit sekoittavat pakkaa!</p>
+          <p class="card-text text-secondary">Vauhdikas peli, jossa yritetään välttää viimeiseksi jäämistä. Erikoiskortit sekoittavat pakkaa!</p>
           <button onclick="haeSaannot('paskahousu')" class="btn btn-outline-info mt-auto fw-bold">Lue säännöt 📖</button>
         </div>
       </div>
@@ -135,28 +145,6 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<hr class="container border-secondary my-5">
-
-<!-- OSA 2: Interaktiivinen korttinosto (Deck of Cards API) -->
-<div class="container my-5" id="nosto">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <div class="p-4 card-box shadow-lg">
-        <h3 class="mb-3 text-light fw-bold">Interaktiivinen korttinosto</h3>
-        <p class="text-secondary">Haetaan kortti Deck of Cards -rajapinnasta:</p>
-        
-        <div id="card-display" class="card-img-holder my-3">
-          <span class="text-muted fs-5">Paina painiketta nostaaksesi kortin!</span>
-        </div>
-
-        <div id="kortti-info" class="fw-bold fs-5 text-warning my-2"></div>
-
-        <button onclick="nostaKortti()" class="btn btn-danger btn-lg mt-2 shadow">Nosta kortti paksasta 🎴</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -191,12 +179,13 @@
 <!-- JavaScript -->
 <script>
   let saannotModal;
+  const jsonUrl = "https://raw.githubusercontent.com/juliadigi/juliadigi.github.io/main/pakkasekaisin/saannot.json";
 
   document.addEventListener("DOMContentLoaded", function() {
     saannotModal = new bootstrap.Modal(document.getElementById('saannotModal'));
   });
 
-  // Haetaan pelisäännöt ulkoisesta RAW JSON -rajapinnasta (GitHub Raw API)
+  // Haetaan pelisäännöt ulkoisesta RAW JSON -rajapinnasta Modal-ikkunaan
   function haeSaannot(peliAvain) {
     document.getElementById("modalPelinNimi").innerText = "Ladataan...";
     document.getElementById("modalPelinSisalto").innerHTML = `
@@ -206,9 +195,6 @@
       </div>`;
     
     saannotModal.show();
-
-    // Ulkoinen JSON-rajapinta pelisäännöille
-    const jsonUrl = "https://raw.githubusercontent.com/juliadigi/juliadigi.github.io/main/pakkasekaisin/saannot.json";
 
     fetch(jsonUrl)
       .then(response => {
@@ -235,43 +221,36 @@
       });
   }
 
-  // Deck of Cards API - korttinosto
-  let deckId = null;
+  // Arvotaan satunnainen korttipeli JSON-rajapinnasta
+  function arvoPeli() {
+    const laatikko = document.getElementById("arvottu-peli-box");
+    laatikko.innerHTML = `
+      <div class="text-center py-2">
+        <div class="spinner-border text-warning" role="status"></div>
+        <p class="mt-2 text-secondary mb-0">Arvotaan peliä JSON-rajapinnasta...</p>
+      </div>`;
 
-  function alustaPakka() {
-    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-      .then(response => response.json())
-      .then(data => {
-        deckId = data.deck_id;
+    fetch(jsonUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Haku epäonnistui");
+        return response.json();
       })
-      .catch(error => console.error("Virhe pakan alustuksessa:", error));
-  }
-
-  function nostaKortti() {
-    if (!deckId) {
-      alustaPakka();
-      document.getElementById("kortti-info").innerText = "Alustetaan pakkaa, yritä uudelleen...";
-      return;
-    }
-
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-      .then(response => response.json())
       .then(data => {
-        if (data.cards.length > 0) {
-          let kortti = data.cards[0];
-          document.getElementById("card-display").innerHTML = `<img src="${kortti.image}" alt="${kortti.value} of ${kortti.suit}">`;
-          document.getElementById("kortti-info").innerText = `${kortti.value} of ${kortti.suit}`;
-        } else {
-          document.getElementById("kortti-info").innerText = "Pakka loppui! Sekoitetaan uusi pakka...";
-          alustaPakka();
-        }
+        const avaimet = Object.keys(data);
+        const satunnainenAvain = avaimet[Math.floor(Math.random() * avaimet.length)];
+        const peli = data[satunnainenAvain];
+
+        laatikko.innerHTML = `
+          <h3 class="text-warning fw-bold mb-2">${peli.nimi}</h3>
+          <p class="mb-1"><strong>Pelaajamäärä:</strong> ${peli.pelaajamaara}</p>
+          <p class="mb-3"><strong>Tavoite:</strong> ${peli.tavoite}</p>
+          <button onclick="haeSaannot('${satunnainenAvain}')" class="btn btn-sm btn-info fw-bold">Katso täydet säännöt 📖</button>
+        `;
       })
       .catch(error => {
-        document.getElementById("card-display").innerHTML = "<p class='text-danger'>Kortin haku epäonnistui</p>";
+        laatikko.innerHTML = "<p class='text-danger text-center my-3'>Pelin arvonta epäonnistui. Tarkista yhteys.</p>";
       });
   }
-
-  alustaPakka();
 </script>
 
 </body>
