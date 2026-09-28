@@ -98,7 +98,7 @@
 </head>
 <body>
 
-<!-- Navigaatiopalkki -->
+<!-- Navigaatiopalkki (Karuselli poistettu linkeistä) -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary">
   <div class="container">
     <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
@@ -111,9 +111,6 @@
           <a class="nav-link text-warning fw-bold" href="#arvonta">🎲 Arvo päivän peli</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#esittely">Karuselli</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#pelit">Kaikki korttipelit</a>
         </li>
       </ul>
@@ -122,11 +119,11 @@
 </nav>
 
 <!-- OSA 1: Bootstrap Kuvakaruselli -->
-<div id="esittely" class="carousel slide my-4 container" data-bs-ride="carousel">
+<div class="carousel slide my-4 container" id="esittelyKaruselli" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#esittely" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#esittely" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#esittely" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#esittelyKaruselli" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#esittelyKaruselli" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#esittelyKaruselli" data-bs-slide-to="2"></button>
   </div>
   <div class="carousel-inner rounded-4 shadow-lg border border-secondary">
     <div class="carousel-item active">
@@ -154,10 +151,10 @@
       </div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#esittely" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#esittelyKaruselli" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#esittely" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#esittelyKaruselli" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </button>
 </div>
@@ -186,7 +183,7 @@
 <div class="container my-5" id="pelit">
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
     <h2 class="gold-gradient fw-bold mb-3 mb-md-0">Kaikki korttipelit (10)</h2>
-    <!-- Tekniikka 1: Reaaliaikainen hakukenttä -->
+    <!-- Hakukenttä -->
     <div class="w-100 w-md-auto" style="max-width: 320px;">
       <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-secondary" placeholder="🔍 Etsi peliä nimellä...">
     </div>
