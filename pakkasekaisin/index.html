@@ -52,7 +52,7 @@
       padding: 20px;
     }
 
-    /* Sääkompassi-widgetti visuaalisuus tyyli: taustat,reunat ja varjot */
+    /* Sääkompassi-widgetti visuaalisuus tyyli: taustat,reunat ja varjot. Sijoitettu sticky-asettelulla, jotta se pysyy näkyvissä sivun yläosassa*/
     .weather-widget {
       background: linear-gradient(145deg, #111a2e 0%, #080d1a 100%);
       border: 1px solid rgba(0, 242, 254, 0.35);
@@ -63,7 +63,8 @@
       top: 100px;
     }
 
-    /* pelikorttien tyylit ja hover-efektit, jotka korostaa valittua korttia */
+    /* pelikorttien tyylit ja hover-efektit, jotka korostaa valittua korttia nostamalla sitä hieman ja muuttamalla reunaväriä,
+   mikä parantaa käytettävyyttä ja visuaalista palautetta. */
     .card-game {
       background-color: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -81,7 +82,7 @@
       object-fit: cover;
     }
 
-    /* Arvontaosion laatikko ja taustat sekä varjostukset */
+    /* Arvontaosion laatikko ja taustat sekä varjostukset. Tyyli erottaa arvontaosion muusta sisällöstä ja tekee siitä visuaalisesti selkeän */
     .card-box-modern {
       background: linear-gradient(145deg, #111a2e 0%, #0a1122 100%);
       border: 1px solid rgba(212, 175, 55, 0.35);
@@ -89,7 +90,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Animaatio noppa, kevyt visuaalisuus joka elävoittää  */
+    /* Animaatio noppa, kevyt visuaalisuus joka elävoittää. Käytetään scale- ja varjostusmuutoksia korostaakseen interaktiivisuutta  */
     .dice-circle {
       width: 100px;
       height: 100px;
@@ -114,7 +115,7 @@
       animation: floatPulse 3s infinite ease-in-out;
     }
 
-    /* Modal-ikkunan tyylit, tumma tausta, kultainen reunus, kontrasti  */
+    /* Modal-ikkunan tyylit, tumma tausta, kultainen reunus, kontrasti.Header- ja footer-osien reunat on kevennetty, jotta modal näyttää modernilta */
     .modal-content {
       background-color: var(--card-bg);
       color: #ffffff;
@@ -145,7 +146,7 @@
 </head>
 <body>
 
-<!-- NAVIGAATIOPALKKI (Bootstrap Navibar ja Saavutettavuus) -->
+<!-- NAVIGAATIOPALKKI Bootstrap Navibar,joka skaalautuu mobiililaitteille. Sisältää aria-label -merkinnän saavutettavuuden parantamiseksi) -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary py-3" aria-label="Päänavigaatio">
   <div class="container">
     <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
