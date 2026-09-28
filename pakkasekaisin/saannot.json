@@ -3,18 +3,70 @@
     "nimi": "♣️ Ristiseiska",
     "pelaajamaara": "3–5 henkilöä",
     "tavoite": "Päästä ensimmäisenä eroon kaikista käden korteista.",
-    "saannot": "Peli alkaa ristiseiskasta. Seuraavat pelaajat voivat jatkaa pinoja maittain kutosesta alaspäin tai kasista ylöspäin. Jos pelaajalla ei ole sopivaa korttia, hänen täytyy ottaa kortti panttipakasta tai jättää vuoro väliin."
+    "saannot": "Peli alkaa ristiseiskasta. Seuraavat pelaajat voivat jatkaa pinoja maittain kutosesta alaspäin tai kasista ylöspäin. Jos pelaajalla ei ole sopivaa korttia, hänen täytyy ottaa kortti panttipakasta tai jättää vuoro väliin.",
+    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80"
   },
   "paskahousu": {
     "nimi": "♦️ Paskahousu",
     "pelaajamaara": "2–6 henkilöä",
     "tavoite": "Välttää joutumista viimeiseksi pelaajaksi (paskahousuksi).",
-    "saannot": "Pöytään pelataan aina yhtä suurta tai suurempaa korttia kuin edellinen. Kakkosella voi kaataa minkä tahansa kortin päälle. Kympillä tai ässällä pino tyhjennetään. Jos et voi pelata, joudut nostamaan koko pinon käteesi!"
+    "saannot": "Pöytään pelataan aina yhtä suurta tai suurempaa korttia kuin edellinen. Kakkosella voi kaataa minkä tahansa kortin päälle. Kympillä tai ässällä pino tyhjennetään. Jos et voi pelata, joudut nostamaan koko pinon käteesi!",
+    "kuva": "https://images.unsplash.com/photo-1541278107931-e006523892df?auto=format&fit=crop&w=600&q=80"
   },
   "maija": {
     "nimi": "♥️ Maija",
     "pelaajamaara": "3–6 henkilöä",
     "tavoite": "Päästä eroon kaikista korteista paitsi Patamaijasta (♠Q).",
-    "saannot": "Kortteja pelataan pöytään ja niitä yritetään kaataa valitulla valttimaalla tai suuremmalla saman maan kortilla. Se, jolle jää käteen Patamaija pelin päättyessä, häviää."
+    "saannot": "Kortteja pelataan pöytään ja niitä yritetään kaataa valitulla valttimaalla tai suuremmalla saman maan kortilla. Se, jolle jää käteen Patamaija pelin päättyessä, häviää.",
+    "kuva": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80"
+  },
+  "pokeri": {
+    "nimi": "♠️ Texas Hold'em Pokeri",
+    "pelaajamaara": "2–10 henkilöä",
+    "tavoite": "Muodostaa parhaan viiden kortin käden kahdesta omasta ja viidestä pöytäkortista.",
+    "saannot": "Pelaajille jaetaan kaksi piilokorttia. Panostuskierrosten aikana pöytään avataan 5 yhteistä korttia (Flop, Turn, River). Paras käsi tai viimeinen mukana oleva pelaaja voittaa potin.",
+    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
+  },
+  "blackjack": {
+    "nimi": "🃏 Blackjack",
+    "pelaajamaara": "1–7 henkilöä vs. Jakaja",
+    "tavoite": "Päästä korttien yhteissummalla mahdollisimman lähelle lukua 21 menemättä sen yli.",
+    "saannot": "Kuvakortit ovat 10, ässä on 1 tai 11. Jos kätesi arvo ylittää 21, häviät välittömästi. Jakajan täytyy ottaa kortti lukuun 16 asti ja jäädä vähintään 17 kohdalla.",
+    "kuva": "https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=600&q=80"
+  },
+  "uno": {
+    "nimi": "🔴 Uno",
+    "pelaajamaara": "2–10 henkilöä",
+    "tavoite": "Päästä eroon kaikista omista korteista yhdistämällä värejä tai numeroita.",
+    "saannot": "Pelaa kortti, joka täsmää väriltään tai numeroltaan päällimmäisen kortin kanssa. Erikoiskortit voivat vaihtaa suuntaa, hypätä vuoron yli tai pakottaa muut nostamaan kortteja. Muista huutaa UNO kun sinulla on yksi kortti jäljellä!",
+    "kuva": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80"
+  },
+  "kasino": {
+    "nimi": "♦️ Kasino",
+    "pelaajamaara": "2–4 henkilöä",
+    "tavoite": "Kerätä pöydästä kortteja ja pisteitä erikoiskorteista (kuten Ruutu 10 ja Pata 2).",
+    "saannot": "Pöydästä saalistetaan kortteja omalla käsilinjalla siten, että summat täsmäävät. Ruutu 10 (Iso Kasino) antaa 2 pistettä ja Pata 2 (Pikku Kasino) 1 pisteen.",
+    "kuva": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+  },
+  "baccarat": {
+    "nimi": "👑 Baccarat",
+    "pelaajamaara": "1–14 henkilöä",
+    "tavoite": "Veikata kumman käsi (Pelaaja vai Jakaja) pääsee lähemmäs lukuarvoa 9.",
+    "saannot": "Korttien arvot lasketaan yhteen ja vain kaksoisnumeron viimeinen numero huomioidaan (esim. 7+6 = 13 -> käden arvo on 3). Ässä on 1 ja kuvakortit 0.",
+    "kuva": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+  },
+  "mustapekka": {
+    "nimi": "🖤 Musta Pekka",
+    "pelaajamaara": "3–6 henkilöä",
+    "tavoite": "Parittaa kaikki kortit ja välttää yksinäisen Mustan Pekan jäämistä käteen.",
+    "saannot": "Pelaajat nostavat vuorotellen kortteja toistensa käsistä ja muodostavat pareja. Peli päättyy kun kaikki parit on muodostettu ja se, jolle Musta Pekka jää, häviää.",
+    "kuva": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+  },
+  "tikki": {
+    "nimi": "♠️ Tikki",
+    "pelaajamaara": "3–4 henkilöä",
+    "tavoite": "Voittaa tietty määrä tikkejä sovittujen sääntöjen mukaisesti.",
+    "saannot": "Maapakko on voimassa: pelaajan on pelattava samaa maata kuin ajokortti jos mahdollista. Suurin kortti pelattua maata (tai valttia) voittaa tikin.",
+    "kuva": "https://images.unsplash.com/photo-1543599538-78c4f692f184?auto=format&fit=crop&w=600&q=80"
   }
 }
