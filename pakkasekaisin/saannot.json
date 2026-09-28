@@ -53,20 +53,20 @@
     "pelaajamaara": "1–14 henkilöä",
     "tavoite": "Veikata kumman käsi (Pelaaja vai Jakaja) pääsee lähemmäs lukuarvoa 9.",
     "saannot": "Korttien arvot lasketaan yhteen ja vain kaksoisnumeron viimeinen numero huomioidaan (esim. 7+6 = 13 -> käden arvo on 3). Ässä on 1 ja kuvakortit 0.",
-    "kuva": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80"
   },
   "mustapekka": {
     "nimi": "🖤 Musta Pekka",
     "pelaajamaara": "3–6 henkilöä",
     "tavoite": "Parittaa kaikki kortit ja välttää yksinäisen Mustan Pekan jäämistä käteen.",
     "saannot": "Pelaajat nostavat vuorotellen kortteja toistensa käsistä ja muodostavat pareja. Peli päättyy kun kaikki parit on muodostettu ja se, jolle Musta Pekka jää, häviää.",
-    "kuva": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1543599538-78c4f692f184?auto=format&fit=crop&w=600&q=80"
   },
   "tikki": {
     "nimi": "♠️ Tikki",
     "pelaajamaara": "3–4 henkilöä",
     "tavoite": "Voittaa tietty määrä tikkejä sovittujen sääntöjen mukaisesti.",
     "saannot": "Maapakko on voimassa: pelaajan on pelattava samaa maata kuin ajokortti jos mahdollista. Suurin kortti pelattua maata (tai valttia) voittaa tikin.",
-    "kuva": "https://images.unsplash.com/photo-1543599538-78c4f692f184?auto=format&fit=crop&w=600&q=80"
+    "kuva": "https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=600&q=80"
   }
 }
