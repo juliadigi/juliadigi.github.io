@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <!-- Bootstrap 5 CSS -->
+  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts: Cinzel (kasinofontti) & Inter (leipäteksti) -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- SIVUSTON OMAT TYYLIT (CSS) -->
+  <!-- SIVUSTON TYYLIT -->
   <style>
     :root {
       --bg-dark: #080d1a;
@@ -38,7 +38,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Bootstrap-karusellin mukautukset */
+    /* Bootstrap-karusellin muutokset */
     .carousel-item img {
       height: 380px;
       object-fit: cover;
@@ -52,7 +52,7 @@
       padding: 20px;
     }
 
-    /* Sääkompassi-widget sivupalkissa */
+    /* Sääkompassi-widgetti visuaalisuus tyyli: taustat,reunat ja varjot */
     .weather-widget {
       background: linear-gradient(145deg, #111a2e 0%, #080d1a 100%);
       border: 1px solid rgba(0, 242, 254, 0.35);
@@ -63,7 +63,7 @@
       top: 100px;
     }
 
-    /* Korttipelikorttien tyylit ja hover-efektit */
+    /* pelikorttien tyylit ja hover-efektit, jotka korostaa valittua korttia */
     .card-game {
       background-color: var(--card-bg);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -81,7 +81,7 @@
       object-fit: cover;
     }
 
-    /* Arvontaosion moderni laatikko */
+    /* Arvontaosion laatikko ja taustat sekä varjostukset */
     .card-box-modern {
       background: linear-gradient(145deg, #111a2e 0%, #0a1122 100%);
       border: 1px solid rgba(212, 175, 55, 0.35);
@@ -89,7 +89,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Animoitu pyöreä arvontakiekko */
+    /* Animaatio noppa, kevyt visuaalisuus joka elävoittää  */
     .dice-circle {
       width: 100px;
       height: 100px;
@@ -114,7 +114,7 @@
       animation: floatPulse 3s infinite ease-in-out;
     }
 
-    /* Modal-ikkunan tyylit */
+    /* Modal-ikkunan tyylit, tumma tausta, kultainen reunus, kontrasti  */
     .modal-content {
       background-color: var(--card-bg);
       color: #ffffff;
@@ -145,7 +145,7 @@
 </head>
 <body>
 
-<!-- NAVIGAATIOPALKKI (Bootstrap Navbar & Saavutettavuus) -->
+<!-- NAVIGAATIOPALKKI (Bootstrap Navibar ja Saavutettavuus) -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top border-bottom border-secondary py-3" aria-label="Päänavigaatio">
   <div class="container">
     <a class="navbar-brand fw-bold fs-3 gold-gradient" href="#">♠️ PAKKA SEKAISIN</a>
@@ -164,7 +164,7 @@
         </li>
       </ul>
       
-      <!-- Hakukenttä Headerissa (Saavutettavuus: aria-label lisätty) -->
+      <!-- Hakukenttä Headerissa  -->
       <form class="d-flex" role="search" onsubmit="return false;">
         <input type="text" id="hakukentta" onkeyup="suodataPelit()" class="form-control bg-dark text-light border-warning" placeholder="🔍 Etsi peliä nimellä..." aria-label="Etsi korttipeliä nimellä" style="min-width: 220px;">
       </form>
@@ -172,7 +172,7 @@
   </div>
 </nav>
 
-<!-- OSA 1: Bootstrap Kuvakaruselli -->
+<!-- Bootstrap Kuvakaruselli -->
 <header id="esittelyKaruselli" class="carousel slide my-4 container" data-bs-ride="carousel" aria-label="Suositellut korttipelit">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#esittelyKaruselli" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Dia 1: Pokeri"></button>
@@ -213,11 +213,11 @@
   </button>
 </header>
 
-<!-- OSA 2: PÄÄSISÄLTÖ JA SIVUPALKKI (Sää-widget + Arvonta) -->
+<!-- PÄÄSISÄLTÖ JA SIVUPALKKI (Sää-widget + Arvonta) -->
 <main class="container my-5">
   <div class="row g-4">
     
-    <!-- Pääsarake (8/12): Arvo peli -->
+    <!-- Pääsarake, Arvo peli -->
     <section class="col-lg-8" id="arvonta" aria-label="Pelin arvonta">
       <div class="p-4 p-md-5 card-box-modern shadow-lg text-center h-100 d-flex flex-column justify-content-center">
         <h2 class="mb-2 gold-gradient fw-bold">🎲 Arvo päivän korttipeli</h2>
@@ -237,7 +237,7 @@
       </div>
     </section>
 
-    <!-- Sivupalkki (4/12): Open-Meteo Sää API & Geolocation -->
+    <!-- Sivupalkki Sää API & Geolocation -->
     <aside class="col-lg-4" aria-label="Peli-illan sääkompassi">
       <div class="weather-widget p-4 text-center h-100 d-flex flex-column justify-content-center">
         <h3 class="h4 gold-gradient fw-bold mb-3">🌤️ Sääkompassi</h3>
@@ -258,7 +258,7 @@
 
 <hr class="container border-secondary my-5">
 
-<!-- OSA 3: Kaikki korttipelit Grid (10 kpl JSON-rajapinnasta) -->
+<!-- Kaikki korttipelit Grid (10 kpl JSON-rajapinnasta) -->
 <section class="container my-5" id="pelit" aria-label="Korttipelilistaus">
   <h2 class="gold-gradient fw-bold mb-4 text-center text-md-start">Kaikki korttipelit (10)</h2>
 
@@ -279,7 +279,7 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Sulje ikkuna"></button>
       </div>
       <div class="modal-body fs-5" id="modalPelinSisalto">
-        <!-- Sisältö ladataan dynaamisesti JS:llä -->
+        <!-- Sisältön lataus dynaamisesti JS:llä -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sulje</button>
@@ -288,12 +288,12 @@
   </div>
 </div>
 
-<!-- JALKATUNNISTE (Footer) -->
+<!-- Footer -->
 <footer class="mt-5 p-4 bg-dark text-white text-center border-top border-secondary">
   <p class="mb-0 text-secondary">Pakka Sekaisin &copy; 2026</p>
 </footer>
 
-<!-- JAVASCRIPT (Koodin toiminnallisuudet & kommentointi) -->
+<!-- JAVASCRIPT, toiminnallisuudet -->
 <script>
   let saannotModal;
   let kaikkiPelitData = {};
@@ -324,7 +324,7 @@
           haeSaaKoordinaateilla(lat, lon, "Nykyinen sijaintisi");
         },
         (error) => {
-          // Jos käyttäjä kieltää paikannuksen, käytetään varana Helsinkiä
+          // Jos käyttäjä kieltää paikannuksen, käytetään varana esim. Helsinkiä
           haeSaaKoordinaateilla(60.1695, 24.9354, "Sijainti (Helsinki)");
         },
         { timeout: 7000 }
@@ -393,7 +393,7 @@
 
     Object.keys(pelit).forEach(avain => {
       const peli = pelit[avain];
-      // Saavutettavuus: puhdistetaan pelin nimi alt-tekstiä varten
+      // Saavutettavuus: tyhjennetään pelin nimi alt-tekstiä varten
       const puhtainNimi = peli.nimi.replace(/[^\w\säöÅÄÖ-]/gi, '').trim();
 
       grid.innerHTML += `
@@ -413,7 +413,7 @@
   }
 
   /**
-   * 4. Live-hakutoiminto korttipeleille
+   * 4. reaali hakutoiminto korttipeleille
    */
   function suodataPelit() {
     const hakusana = document.getElementById("hakukentta").value.toLowerCase();
