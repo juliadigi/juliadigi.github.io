@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <title>Pakka Sekaisin - Korttipelit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+  .hero-header {
+    background-color: #1e293b;
+    color: white;
+    padding: 60px 20px;
+  }
+  .card-box {
+    background-color: #f8fafc;
+    border: 2px dashed #0f172a;
+    border-radius: 12px;
+  }
+  .card-img-holder {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-img-holder img {
+    max-height: 200px;
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
+  }
+  </style>
+</head>
+<body>
 
+<!-- Bootstrap Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-danger fs-3" href="#">🃏 Pakka Sekaisin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#nosto">Nosta kortti</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#saannot">Pelisäännöt</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero / Esittelyosio -->
+<div class="container-fluid hero-header text-center">
+  <h1 class="display-4 fw-bold">Pakka Sekaisin!</h1>
+  <p class="lead">Peli-illan pelastaja: nosta satunnainen kortti paksasta tai tarkista pelien säännöt.</p> 
+</div>
+
+<!-- OSA 1: Ulkoinen JSON API -haku -->
+<div class="container my-5" id="nosto">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <div class="p-4 card-box shadow-sm">
+        <h2 class="mb-3">Interaktiivinen korttinosto</h2>
+        <p class="text-muted">Haetaan kortti ulkoisesta palvelimesta (Deck of Cards API JSON-rajapinta):</p>
+        
+        <div id="card-display" class="card-img-holder my-3">
+          <span class="text-secondary">Paina painiketta nostaaksesi kortin!</span>
+        </div>
+
+        <div id="kortti-info" class="fw-bold fs-5 text-primary my-2"></div>
+
+        <button onclick="nostaKortti()" class="btn btn-danger btn-lg mt-2">Nosta kortti paksasta 🎴</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="container">
+
+<!-- OSA 2: Bootstrap Accordion (Haitarivalikko) -->
+<div class="container my-5" id="saannot">
+  <h2 class="text-center mb-4">Suosittujen korttipelien säännöt</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      
+      <div class="accordion" id="peliAccordion">
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              ♣️ Ristiseiska
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#peliAccordion">
+            <div class="accordion-body">
+              <strong>Pelaajamäärä:</strong> 3–5 henkilöä.<br>
+              <strong>Idea:</strong> Peli alkaa ristiseiskasta. Pinoja kasvatetaan kutosesta alaspäin ja kasista ylöspäin. Ensimmäisenä korteistaan eroon päässyt voittaa.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              ♦️ Paskahousu
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#peliAccordion">
+            <div class="accordion-body">
+              <strong>Pelaajamäärä:</strong> 2–6 henkilöä.<br>
+              <strong>Idea:</strong> Pöytään pelataan aina yhtä suurta tai suurempaa korttia. Kakkosella voi kaataa minkä vain kortin, ja kympillä tai ässällä pino tyhjennetään.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+              ♥️ Maija
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#peliAccordion">
+            <div class="accordion-body">
+              <strong>Pelaajamäärä:</strong> 3–6 henkilöä.<br>
+              <strong>Idea:</strong> Tavoitteena on päästä eroon kaikista korteista paitsi Patamaijasta (♠Q). Häviäjäksi jää se, jolle Patamaija jää käteen pelin päättyessä.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 p-4 bg-dark text-white text-center">
+  <p class="mb-0">Pakka Sekaisin &copy; 2026 – Toteutettu Bootstrap 5 -pohjalle</p>
+</div>
+
+<!-- JavaScript ulkoisen JSON-datan hakemiseen -->
+<script>
+  let deckId = null;
+
+  function alustaPakka() {
+    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+      .then(response => response.json())
+      .then(data => {
+        deckId = data.deck_id;
+      })
+      .catch(error => console.error("Virhe pakan alustuksessa:", error));
+  }
+
+  function nostaKortti() {
+    if (!deckId) {
+      alustaPakka();
+      document.getElementById("kortti-info").innerText = "Alustetaan pakkaa, yritä uudelleen...";
+      return;
+    }
+
+    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.cards.length > 0) {
+          let kortti = data.cards[0];
+          document.getElementById("card-display").innerHTML = `<img src="${kortti.image}" alt="${kortti.value} of ${kortti.suit}">`;
+          document.getElementById("kortti-info").innerText = `${kortti.value} of ${kortti.suit}`;
+        } else {
+          document.getElementById("kortti-info").innerText = "Pakka loppui! Sekoitetaan uusi pakka...";
+          alustaPakka();
+        }
+      })
+      .catch(error => {
+        document.getElementById("card-display").innerHTML = "<p class='text-danger'>Kortin haku epäonnistui</p>";
+      });
+  }
+
+  alustaPakka();
+</script>
+
+</body>
+</html>
