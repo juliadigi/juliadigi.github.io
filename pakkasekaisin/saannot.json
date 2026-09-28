@@ -1,0 +1,20 @@
+{
+  "ristiseiska": {
+    "nimi": "♣️ Ristiseiska",
+    "pelaajamaara": "3–5 henkilöä",
+    "tavoite": "Päästä ensimmäisenä eroon kaikista käden korteista.",
+    "saannot": "Peli alkaa ristiseiskasta. Seuraavat pelaajat voivat jatkaa pinoja maittain kutosesta alaspäin tai kasista ylöspäin. Jos pelaajalla ei ole sopivaa korttia, hänen täytyy ottaa kortti panttipakasta tai jättää vuoro väliin."
+  },
+  "paskahousu": {
+    "nimi": "♦️ Paskahousu",
+    "pelaajamaara": "2–6 henkilöä",
+    "tavoite": "Välttää joutumista viimeiseksi pelaajaksi (paskahousuksi).",
+    "saannot": "Pöytään pelataan aina yhtä suurta tai suurempaa korttia kuin edellinen. Kakkosella voi kaataa minkä tahansa kortin päälle. Kympillä tai ässällä pino tyhjennetään. Jos et voi pelata, joudut nostamaan koko pinon käteesi!"
+  },
+  "maija": {
+    "nimi": "♥️ Maija",
+    "pelaajamaara": "3–6 henkilöä",
+    "tavoite": "Päästä eroon kaikista korteista paitsi Patamaijasta (♠Q).",
+    "saannot": "Kortteja pelataan pöytään ja niitä yritetään kaataa valitulla valttimaalla tai suuremmalla saman maan kortilla. Se, jolle jää käteen Patamaija pelin päättyessä, häviää."
+  }
+}
